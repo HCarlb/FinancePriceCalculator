@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinancePriceToolProject.Views"
         mc:Ignorable="d"
-        Title="ShellView" Height="1000" Width="900" FontSize="14" FontFamily="Segoe UI">
+        Title="PriceCalculator v1.00 - by Henrik Carlberg 2020-06-28" 
+        Height="1000" Width="1400" FontSize="14" FontFamily="Segoe UI">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

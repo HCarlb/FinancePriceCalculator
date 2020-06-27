@@ -179,15 +179,14 @@ namespace FinancePriceToolProject.ViewModels
 
         public string ToPercetile(decimal value1, decimal value2)
         {
-            try
-            {
-                return decimal.Round((((value1 - value2) / value2) * 100), 1).ToString() + " %";
-            } 
-            catch (DivideByZeroException)
+            if (value2 == 0)
             {
                 return "#N/A";
             }
-            
+            else
+            {
+                return decimal.Round((((value1 - value2) / value2) * 100), 1).ToString() + " %";
+            }
         }
     }
 }
