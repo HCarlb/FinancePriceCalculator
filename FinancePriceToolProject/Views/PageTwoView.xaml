@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="FinancePriceToolProject.Views.PageTwoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FinancePriceToolProject.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition MinWidth="300"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>    
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="#EEE" Margin="0 0 10 0">
+            <StackPanel Margin="10">
+                <Button x:Name="GotoPageOne" Content="&lt;&lt; Goto to previous page" Margin="0 0 0 30"/>
+                <TextBlock Text="3. Select target date:"/>
+                <DatePicker x:Name="TargetDatePicker"/>
+
+                <Button x:Name="CreateDataGridContent" Content="4. Display data &gt;&gt;" DockPanel.Dock="Top" Margin="0 20 0 0"/>
+
+                <DockPanel Margin="0 20">
+                    <TextBlock Text="Found ("/>
+                    <TextBlock Text="{Binding DataGrid1ItemSource.Count}"/>
+                    <TextBlock Text=") Items."/>
+                </DockPanel>
+                <StackPanel>
+                    <TextBlock Text="Prices are calculated"/>
+                    <TextBlock Text="as the Bill of Material looks at"/>
+                    <TextBlock Text="{Binding SelectedDate}" FontWeight="SemiBold"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+            <DataGrid x:Name="dataGrid1" 
+                    Grid.Row="0" Grid.Column="1"
+                    ItemsSource="{Binding DataGrid1ItemSource}" 
+                    AutoGenerateColumns="True" 
+                    RowHeaderWidth="0" 
+                    HorizontalGridLinesBrush="{x:Null}" 
+                    VerticalGridLinesBrush="#FFAAAAAA" 
+                    AlternatingRowBackground="#FFE4E4E4" 
+                    GridLinesVisibility="Vertical" />
+
+    </Grid>
+</UserControl>
