@@ -169,11 +169,25 @@ namespace FinancePriceToolProject.ViewModels
                                FixedPrice = p.FixedPrice.ToString("C2", CultureInfo.CreateSpecificCulture("sv-SE")),
                                CalculatedPrice = p.GetCalculatedPrice(targetDate).ToString("C2", CultureInfo.CreateSpecificCulture("sv-SE")),
                                CalculatedPriceActual = p.GetCalculatedPriceActual(targetDate).ToString("C2", CultureInfo.CreateSpecificCulture("sv-SE")),
+                               DeltaFixedVsActualPrice = ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)),
+                               ContainsProductsLackingFixedPrice = String.Join("; ",p.GetSubProductsLackingPrice().ToArray()),
                                //p.HasComponents
                            }).ToList();
 
             DataGrid1ItemSource = isource;
         }
 
+        public string ToPercetile(decimal value1, decimal value2)
+        {
+            try
+            {
+                return decimal.Round((((value1 - value2) / value2) * 100), 1).ToString() + " %";
+            } 
+            catch (DivideByZeroException)
+            {
+                return "#N/A";
+            }
+            
+        }
     }
 }

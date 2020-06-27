@@ -43,7 +43,8 @@
                     HorizontalGridLinesBrush="{x:Null}" 
                     VerticalGridLinesBrush="#FFAAAAAA" 
                     AlternatingRowBackground="#FFE4E4E4" 
-                    GridLinesVisibility="Vertical" />
+                    GridLinesVisibility="Vertical" 
+                    CellStyle="{StaticResource DataGridCellStyle1}"/>
 
     </Grid>
 </UserControl>

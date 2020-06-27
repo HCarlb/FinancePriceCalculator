@@ -119,5 +119,38 @@ namespace FinancePriceToolProject.Models
         //    }
         //    return count;
         //}
+
+
+        public List<string> GetSubProductsLackingPrice()
+        {
+            List<string> productsLackingFixedPrice = Relations
+                .Where(r => r.Product.FixedPrice <= 0)
+                .Select(p=>p.Product.Id)
+                .OrderByDescending(c => c)
+                //.ToArray();
+                .ToList();
+            List<string> subproductslack = this.GetSubSubProductsLackingPrice();
+
+            //return String.Join("; ", productsLackingFixedPrice);
+            return productsLackingFixedPrice
+                .Concat(subproductslack)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+        }
+
+
+
+        public List<string> GetSubSubProductsLackingPrice()
+        {
+            List<string> pp = new List<string>();
+            var products = Relations.Select(p => p.Product).ToList();
+            foreach (var product in products)
+            {
+                pp.AddRange(product.GetSubProductsLackingPrice());
+            }
+            return pp;
+        }
+        
     }
 }
