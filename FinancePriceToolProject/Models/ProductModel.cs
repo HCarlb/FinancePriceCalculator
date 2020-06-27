@@ -17,7 +17,7 @@ namespace FinancePriceToolProject.Models
         public List<RelationModel> Relations { get; private set; } = new List<RelationModel>();
         public decimal FixedPrice { get; set; }
         public bool HasComponents => Relations.Count > 0;
-        public int ComponentCount => Relations.Count;
+        public int ComponentCount => Relations.Count;   // Thihs is wrom
 
         public void AddChild(ProductModel product, decimal quantity, DateTime validFrom, DateTime validTo)
         {
@@ -99,7 +99,7 @@ namespace FinancePriceToolProject.Models
                     } 
                     else
                     {
-                        sumPrice += relation.Product.FixedPrice;
+                        sumPrice += relation.Product.FixedPrice * quantity;
                     }
                 }
             }
