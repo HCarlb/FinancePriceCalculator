@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FinancePriceToolProject.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="600" Background="White">
+             d:DesignHeight="450" d:DesignWidth="600" Background="White">
     <Grid>
         <StackPanel>
 
@@ -24,7 +24,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="30"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="3"/>
                     <RowDefinition Height="Auto"/>
@@ -37,11 +37,11 @@
                 <!-- BOM -->
                 <TextBlock Text="1. Get Bill of Materials from file:" FontSize="14"  Grid.Column="0" Grid.Row="1"/>
                 <Border BorderBrush="Gray" BorderThickness="0.8" Background="#EEE" Padding="8" Margin="0 0 0 3" Grid.Column="0" Grid.Row="3">
-                    <TextBlock Text="{Binding BomFileSelected}"/>
+                    <TextBlock Text="{Binding BomFileSelected}" FontSize="16" Foreground="DarkBlue"/>
                 </Border>
                 <Button x:Name="SelectBomFile" Content="Select File..." Grid.Column="2" Grid.Row="3"/>
 
-                <WrapPanel Grid.Column="0" Grid.Row="4">
+                <WrapPanel Grid.Column="0" Grid.Row="4" TextBlock.FontStyle="Italic">
                     <TextBlock Text="Found "/>
                     <TextBlock Text="{Binding BomFileRows}"/>
                     <TextBlock Text=" rows."/>
@@ -50,10 +50,10 @@
                 <!--Prices-->
                 <TextBlock Text="2. Get Prices from file:" FontSize="14"  Grid.Column="0" Grid.Row="7"/>
                 <Border BorderBrush="Gray" BorderThickness="0.8" Background="#EEE"  Padding="8" Margin="0 0 0 3" Grid.Column="0" Grid.Row="9">
-                    <TextBlock Text="{Binding PricesFileSelected}"/>
+                    <TextBlock Text="{Binding PricesFileSelected}"  FontSize="16" Foreground="DarkBlue"/>
                 </Border>
                 <Button x:Name="SelectPricesFile" Content="Select file..." Grid.Column="2" Grid.Row="9"/>
-                <WrapPanel Grid.Column="0" Grid.Row="10">
+                <WrapPanel Grid.Column="0" Grid.Row="10" TextBlock.FontStyle="Italic">
                     <TextBlock Text="Found "/>
                     <TextBlock Text="{Binding PriceFileRows}"/>
                     <TextBlock Text=" rows."/>
@@ -62,7 +62,7 @@
 
 
             <StackPanel>
-                <Button x:Name="GotoPageTwo" Content="Continue >>" Padding="10" Width="300"/>
+                <Button x:Name="GotoPageTwo" Content="Continue >>" Padding="10" MinWidth="100" MaxWidth="300"/>
             </StackPanel>
         </StackPanel>
     </Grid>
