@@ -3,7 +3,8 @@
 A tool to calculate part prices through plain material prices 
 using a multilevel Bill of Material.
 
-Build on **.NET Framework v4.7.2**
+Created by Henrik Carlberg in 2020.
+Built with C# using WPF with MVVM design on **.NET Framework v4.7.2**.
 
 
 **Dependencies (NuGet):**
