@@ -172,26 +172,30 @@ namespace FinancePriceToolProject.ViewModels
                            {
                                p.Id,
                                p.ComponentCount,
-                               FixedPrice = p.FixedPrice.ToString(displayFormat, culture),
-                               CalculatedPrice = p.GetCalculatedPrice(targetDate).ToString(displayFormat, culture),
-                               CalculatedPriceActual = p.GetCalculatedPriceActual(targetDate).ToString(displayFormat, culture),
+                               FixedPrice = p.FixedPrice,
+                               CalculatedPrice = p.GetCalculatedPrice(targetDate),
+                               CalculatedPriceActual = p.GetCalculatedPriceActual(targetDate),
                                DeltaFixedVsActualPrice = ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)),
                                ContainsProductsLackingFixedPrice = String.Join(separator, p.GetSubProductsLackingPrice().ToArray()),
+                               //FixedPrice = p.FixedPrice.ToString(displayFormat, culture),
+                               //CalculatedPrice = p.GetCalculatedPrice(targetDate).ToString(displayFormat, culture),
+                               //CalculatedPriceActual = p.GetCalculatedPriceActual(targetDate).ToString(displayFormat, culture),
+                               //DeltaFixedVsActualPrice = ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)),
                                //p.HasComponents
                            }).ToList();
 
             DataGrid1ItemSource = isource;
         }
 
-        public string ToPercetile(decimal value1, decimal value2)
+        public decimal ToPercetile(decimal value1, decimal value2)
         {
             if (value2 == 0)
             {
-                return "#N/A";
+                return 0;
             }
             else
             {
-                return decimal.Round((((value1 - value2) / value2) * 100), 1).ToString() + " %";
+                return ((value1 - value2) / value2) * 100;
             }
         }
     }
