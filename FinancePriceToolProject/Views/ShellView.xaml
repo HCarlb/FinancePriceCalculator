@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:FinancePriceToolProject.Views"
         mc:Ignorable="d"
         Title="{Binding FormTitle}" 
-        Height="1000" Width="1400" FontSize="14" FontFamily="Segoe UI" 
-        Icon="/FinancePriceToolProject;component/Resources/Money.png">
+        Height="1000" Width="1400" FontSize="14" FontFamily="Segoe UI" Icon="/Finance Price Calculation Tool;component/Resources/Money.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

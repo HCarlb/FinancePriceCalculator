@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinancePriceToolProject.Forms"
         mc:Ignorable="d"
-        Title="About" Height="250" Width="440" ResizeMode="NoResize" Topmost="True" FontSize="14" Icon="/FinancePriceToolProject;component/Money.png">
+        Title="About" Height="250" Width="440" ResizeMode="NoResize" Topmost="True" FontSize="14" Icon="/Finance Price Calculation Tool;component/Resources/Money.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
