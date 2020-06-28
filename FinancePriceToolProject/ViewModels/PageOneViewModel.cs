@@ -114,10 +114,20 @@ namespace FinancePriceToolProject.ViewModels
 
         public void SelectBomFile()
         {
-            var newFile = Filebrowser.GetExcelFileName("Select Bill of Materials file");
+            string newFile = Filebrowser.GetExcelFileName("Select Bill of Materials file");
+
             if (newFile.Length > 0)
             {
-                Globals.RawExcelBomFile = ExcelReader.ExcelToDataSet(newFile);
+                try
+                {
+                    Globals.RawExcelBomFile = ExcelReader.ExcelToDataSet(newFile);
+                }
+                catch (Exception ex)
+                {
+                    ShowReadFileMessage(ex);
+                    return;
+                }
+                
                 try
                 {
                     ProcessBomData();
@@ -138,12 +148,36 @@ namespace FinancePriceToolProject.ViewModels
             }
         }
 
+        public void ShowReadFileMessage(Exception ex)
+        {
+            // Give the user a notice about the error
+            string mbText = $"Could not read file.\n\nError:\n{ex.Message}";
+
+            MessageBox.Show(
+                messageBoxText: mbText,
+                caption: $"File read error",
+                button: MessageBoxButton.OK,
+                icon: MessageBoxImage.Error
+            );
+
+        }
+
         public void SelectPricesFile()
         {
-            var newFile = Filebrowser.GetExcelFileName("Select Prices file");
+            string newFile = newFile = Filebrowser.GetExcelFileName("Select Prices file");
+
             if (newFile.Length > 0)
             {
-                Globals.RawExcelPriceFile = ExcelReader.ExcelToDataSet(newFile);
+                try
+                {
+                    Globals.RawExcelPriceFile = ExcelReader.ExcelToDataSet(newFile);
+                }
+                catch (Exception ex)
+                {
+                    ShowReadFileMessage(ex);
+                    return;
+                }
+                
                 try
                 {
                     ProcessPriceData();
