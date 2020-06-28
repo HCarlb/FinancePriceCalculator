@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:FinancePriceToolProject.Views"
         mc:Ignorable="d"
         Title="PriceCalculator v1.00 - by Henrik Carlberg 2020-06-28" 
-        Height="1000" Width="1400" FontSize="14" FontFamily="Segoe UI">
+        Height="1000" Width="1400" FontSize="14" FontFamily="Segoe UI" 
+        Icon="/FinancePriceToolProject;component/Resources/Money.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

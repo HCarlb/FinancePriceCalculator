@@ -2,8 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FinancePriceToolProject.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="CurrencyRoundingDecimals" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">3</Value>
+    <Setting Name="CurrencyDisplayFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C2</Value>
+    </Setting>
+    <Setting Name="CsvSeparator" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">;</Value>
+    </Setting>
+    <Setting Name="ApplicationSpecificCulture" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">sv_SE</Value>
     </Setting>
   </Settings>
 </SettingsFile>

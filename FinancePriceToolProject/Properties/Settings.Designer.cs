@@ -25,10 +25,28 @@ namespace FinancePriceToolProject.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int CurrencyRoundingDecimals {
+        [global::System.Configuration.DefaultSettingValueAttribute("C2")]
+        public string CurrencyDisplayFormat {
             get {
-                return ((int)(this["CurrencyRoundingDecimals"]));
+                return ((string)(this["CurrencyDisplayFormat"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(";")]
+        public string CsvSeparator {
+            get {
+                return ((string)(this["CsvSeparator"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("sv_SE")]
+        public string ApplicationSpecificCulture {
+            get {
+                return ((string)(this["ApplicationSpecificCulture"]));
             }
         }
     }

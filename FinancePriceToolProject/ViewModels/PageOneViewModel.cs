@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using FinancePriceToolProject.Events;
+using FinancePriceToolProject.Forms;
 using FinancePriceToolProject.Helpers;
 using FinancePriceToolProject.Models;
 using Microsoft.Win32;
@@ -22,7 +23,34 @@ namespace FinancePriceToolProject.ViewModels
         private string _bomFileSelected;
         private DateTime _targetDate;
         private string _pricesFileSelected;
+        private int _priceFileRows;
+        private int _bomFileRows;
 
+        #region Properties
+        public int BomFileRows
+        {
+            get
+            {
+                return _bomFileRows;
+            }
+            set
+            {
+                _bomFileRows = value;
+                NotifyOfPropertyChange(() => BomFileRows);
+            }
+        }
+        public int PriceFileRows
+        {
+            get
+            {
+                return _priceFileRows;
+            }
+            set
+            {
+                _priceFileRows = value;
+                NotifyOfPropertyChange(() => PriceFileRows);
+            }
+        }
         public DateTime TargetDate
         {
             get
@@ -43,12 +71,11 @@ namespace FinancePriceToolProject.ViewModels
             }
             set
             {
-                _bomFileSelected = value;
+                _bomFileSelected = Path.GetFileName(value);
                 NotifyOfPropertyChange(() => BomFileSelected);
                 NotifyOfPropertyChange(() => CanGotoPageTwo);
             }
         }
-
         public string PricesFileSelected
         {
             get
@@ -57,12 +84,11 @@ namespace FinancePriceToolProject.ViewModels
             }
             set
             {
-                _pricesFileSelected = value;
+                _pricesFileSelected = Path.GetFileName(value);
                 NotifyOfPropertyChange(() => PricesFileSelected);
                 NotifyOfPropertyChange(() => CanGotoPageTwo);
             }
         }
-
         public bool CanGotoPageTwo
         {
             get
@@ -74,6 +100,7 @@ namespace FinancePriceToolProject.ViewModels
                 return false;
             }
         }
+        #endregion
 
         // Methods
         public PageOneViewModel(SimpleContainer container, IEventAggregator events)
@@ -142,7 +169,6 @@ namespace FinancePriceToolProject.ViewModels
             _events.PublishOnUIThread(new GotoPageTwoEvent(this));
         }
 
-
         private void ProcessBomData()
         {
             string ConvertLocationToLocationID(string location)
@@ -166,8 +192,12 @@ namespace FinancePriceToolProject.ViewModels
                                    Quantity = Convert.ToDecimal(b.Field<dynamic>("ns3:Quantity")),
                                }).ToList();
 
+            BomFileRows = Globals.BomData.Count;
         }
-
+        public string GetText()
+        {
+            return $"asdad {BomFileRows} asdad";
+        }
         private void ProcessPriceData()
         {
             // Read excelfile and extract the first sheet as IEnumerable to make it work with LINQ
@@ -182,6 +212,15 @@ namespace FinancePriceToolProject.ViewModels
                                       //StandardPrice = Convert.ToDecimal(p.Field<dynamic>("StandardPrice")),
                                       MaterialPrice = Convert.ToDecimal(p.Field<dynamic>("MaterialPrice")),
                                   }).ToList();
+
+            PriceFileRows = Globals.PriceData.Count;
+        }
+
+
+        public void ShowAbout()
+        {
+            var x = new About();
+            x.ShowDialog();
         }
 
         public void Handle(GotoPageOneEvent message)

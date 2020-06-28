@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using FinancePriceToolProject.Events;
 using FinancePriceToolProject.Models;
+using FinancePriceToolProject.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -158,7 +159,12 @@ namespace FinancePriceToolProject.ViewModels
 
         public void CreateDataGridContent()
         {
-            var targetDate = TargetDatePicker.Date;
+            DateTime targetDate = TargetDatePicker.Date;
+            CultureInfo culture = CultureInfo.CreateSpecificCulture(Settings.Default.ApplicationSpecificCulture);
+            string displayFormat = Settings.Default.CurrencyDisplayFormat;
+            string separator = Settings.Default.CsvSeparator + " ";
+
+
             SelectedDate = targetDate.ToLongDateString();
             var isource = (from p in Globals.Products
                            where p.HasComponents == true
@@ -166,11 +172,11 @@ namespace FinancePriceToolProject.ViewModels
                            {
                                p.Id,
                                p.ComponentCount,
-                               FixedPrice = p.FixedPrice.ToString("C2", CultureInfo.CreateSpecificCulture("sv-SE")),
-                               CalculatedPrice = p.GetCalculatedPrice(targetDate).ToString("C2", CultureInfo.CreateSpecificCulture("sv-SE")),
-                               CalculatedPriceActual = p.GetCalculatedPriceActual(targetDate).ToString("C2", CultureInfo.CreateSpecificCulture("sv-SE")),
+                               FixedPrice = p.FixedPrice.ToString(displayFormat, culture),
+                               CalculatedPrice = p.GetCalculatedPrice(targetDate).ToString(displayFormat, culture),
+                               CalculatedPriceActual = p.GetCalculatedPriceActual(targetDate).ToString(displayFormat, culture),
                                DeltaFixedVsActualPrice = ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)),
-                               ContainsProductsLackingFixedPrice = String.Join("; ",p.GetSubProductsLackingPrice().ToArray()),
+                               ContainsProductsLackingFixedPrice = String.Join(separator, p.GetSubProductsLackingPrice().ToArray()),
                                //p.HasComponents
                            }).ToList();
 
