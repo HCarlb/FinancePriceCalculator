@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FinancePriceToolProject")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Finance Price Tool")]
+[assembly: AssemblyDescription("For calculation of part prices")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Henrik Carlberg")]
 [assembly: AssemblyProduct("FinancePriceToolProject")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright ©  2020 Henrik Carlberg")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
