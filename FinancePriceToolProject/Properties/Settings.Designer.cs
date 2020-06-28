@@ -49,5 +49,14 @@ namespace FinancePriceToolProject.Properties {
                 return ((string)(this["ApplicationSpecificCulture"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int DefaultRoundingDecimals {
+            get {
+                return ((int)(this["DefaultRoundingDecimals"]));
+            }
+        }
     }
 }

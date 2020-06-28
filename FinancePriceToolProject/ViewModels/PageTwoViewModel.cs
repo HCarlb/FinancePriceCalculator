@@ -173,9 +173,9 @@ namespace FinancePriceToolProject.ViewModels
                                p.Id,
                                p.ComponentCount,
                                FixedPrice = p.FixedPrice,
-                               CalculatedPrice = p.GetCalculatedPrice(targetDate),
-                               CalculatedPriceActual = p.GetCalculatedPriceActual(targetDate),
-                               DeltaFixedVsActualPrice = ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)),
+                               CalculatedPrice = decimal.Round(p.GetCalculatedPrice(targetDate), Settings.Default.DefaultRoundingDecimals),
+                               CalculatedPriceActual = decimal.Round(p.GetCalculatedPriceActual(targetDate),Settings.Default.DefaultRoundingDecimals),
+                               DeltaFixedVsActualPrice = decimal.Round(ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)), Settings.Default.DefaultRoundingDecimals),
                                ContainsProductsLackingFixedPrice = String.Join(separator, p.GetSubProductsLackingPrice().ToArray()),
                                //FixedPrice = p.FixedPrice.ToString(displayFormat, culture),
                                //CalculatedPrice = p.GetCalculatedPrice(targetDate).ToString(displayFormat, culture),
@@ -195,7 +195,7 @@ namespace FinancePriceToolProject.ViewModels
             }
             else
             {
-                return ((value1 - value2) / value2) * 100;
+                return decimal.Round(((value1 - value2) / value2), Settings.Default.DefaultRoundingDecimals);
             }
         }
     }
