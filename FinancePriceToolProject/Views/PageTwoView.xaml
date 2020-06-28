@@ -68,7 +68,7 @@
                   IsReadOnly="True">
             <!-- CellStyle="{StaticResource DataGridCellStyle1}" -->
 
-            <DataGrid.Resources>
+            <!--<DataGrid.Resources>
                 <Style x:Key="ProductIdColumnStyle" TargetType="DataGridCell">
                     <Setter Property="FontWeight" Value="SemiBold"/>
                     <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -82,7 +82,7 @@
                     <Setter Property="Foreground" Value="OrangeRed"/>
                     <Setter Property="BorderThickness" Value="0"/>
                 </Style>
-            </DataGrid.Resources>
+            </DataGrid.Resources>-->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Product Id" CellStyle="{StaticResource DataGridCellStyle1}" Binding="{Binding Id}" FontWeight="SemiBold"/>
                 <DataGridTextColumn Header="Component Count" CellStyle="{StaticResource DataGridCellStyle2}" Binding="{Binding ComponentCount}"/>
