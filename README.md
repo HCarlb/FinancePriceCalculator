@@ -1,8 +1,12 @@
 # FinancePriceCalculator
 
-A tool to calculate part prices through plain material prices using a multilevel Bill of Material.
+A tool to calculate part prices through plain material prices 
+using a multilevel Bill of Material.
 
-Dependencies (NuGet):
+Build on **.NET Framework v4.7.2**
+
+
+**Dependencies (NuGet):**
 - Caliburn.Micro v3.2.0
 - Caliburn.Micro.Core v3.2.0
 - Fody v6.2.0
