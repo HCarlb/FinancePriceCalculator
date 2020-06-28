@@ -2,7 +2,9 @@
 using FinancePriceToolProject.Events;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +17,17 @@ namespace FinancePriceToolProject.ViewModels
 		private IEventAggregator _events;
 		private PageOneViewModel _pageOne;
 		private PageTwoViewModel _pageTwo;
+
+		public string FormTitle
+		{
+			// Dynamic Form Title
+			get
+			{
+				var versionInfo = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
+				return $"{versionInfo.ProductName} version {versionInfo.FileVersion} - {versionInfo.LegalCopyright}";
+			}
+		}
+
 
 		public ShellViewModel(IEventAggregator events, SimpleContainer container, PageOneViewModel startPage , PageTwoViewModel pageTwo)
 		{
@@ -41,6 +54,9 @@ namespace FinancePriceToolProject.ViewModels
         {
 			ActivateItem(_pageTwo);
 		}
+
+
+
 
     }
 }
