@@ -9,7 +9,7 @@
       <Value Profile="(Default)">;</Value>
     </Setting>
     <Setting Name="ApplicationSpecificCulture" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">sv_SE</Value>
+      <Value Profile="(Default)">sv-SE</Value>
     </Setting>
     <Setting Name="DefaultRoundingDecimals" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2</Value>

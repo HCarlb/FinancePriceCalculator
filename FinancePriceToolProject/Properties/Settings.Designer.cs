@@ -43,7 +43,7 @@ namespace FinancePriceToolProject.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sv_SE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("sv-SE")]
         public string ApplicationSpecificCulture {
             get {
                 return ((string)(this["ApplicationSpecificCulture"]));
