@@ -60,24 +60,18 @@
                 <conv:ValueToBrushConverter x:Key="ValueToBrushConverter"/>
                 <Style TargetType="DataGridCell"  x:Key="DeltaCellStyle">
                     <Setter Property="Foreground" Value="{Binding DeltaFixedVsActualPrice, Converter={StaticResource ValueToBrushConverter}}"/>
-                    <!--<Style.Triggers>
-                        <Trigger Property="DataGridCell.IsSelected" Value="True">
-                            <Setter Property="Background" Value="#FF635D5D" />
-                        </Trigger>
-                    </Style.Triggers>-->
                 </Style>
 
                 <Style TargetType="{x:Type TextBlock}"  x:Key="PaddingFixLeft">
                     <Setter Property="Margin" Value="10 3"/>
                 </Style>
+                
                 <Style TargetType="{x:Type TextBlock}"  x:Key="PaddingFixRight" BasedOn="{StaticResource PaddingFixLeft}">
                     <Setter Property="HorizontalAlignment" Value="Right" />
                 </Style>
-
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-
                 <DataGridTextColumn Header="Product Id"  
                                     Binding="{Binding Id}" 
                                     FontWeight="SemiBold"
@@ -107,7 +101,6 @@
                 <DataGridTextColumn Header="Contains Products Lacking Price" 
                                     Binding="{Binding ContainsProductsLackingFixedPrice}"
                                     ElementStyle="{StaticResource PaddingFixLeft}" />
-
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
