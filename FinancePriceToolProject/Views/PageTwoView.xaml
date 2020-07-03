@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>    
-        <StackPanel Grid.Column="0" Grid.Row="0" Background="#EEE" Margin="0 0 10 0">
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="#FFF6F6F6" Margin="0 0 10 0">
             <StackPanel Margin="10">
                 <Button x:Name="GotoPageOne" Content="&lt;&lt; Goto to previous page" Margin="0 0 0 30"/>
                 <TextBlock Text="3. Select target date:"/>
@@ -30,7 +30,7 @@
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Prices are calculated as the Bill of Material looks at" TextWrapping="Wrap"/>
-                    <TextBlock Text="{Binding SelectedDate}" FontWeight="SemiBold"  TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding SelectedDate, ConverterCulture=sv-SE}" FontWeight="SemiBold"  TextWrapping="Wrap"/>
                 </WrapPanel>
                 <Border BorderThickness="1" BorderBrush="DarkRed" CornerRadius="12"  Background="#FFFCFC95" Padding="10" Margin="0 50 0 0">
                     <WrapPanel TextBlock.Foreground="#FFD40000">
@@ -39,6 +39,7 @@
                     </WrapPanel>
                 </Border>
             </StackPanel>
+            <!--<Button Content="Go to next page" x:Name="GotoPageThree"/>-->
         </StackPanel>
 
         <DataGrid x:Name="dataGrid1" 
@@ -58,49 +59,74 @@
                   IsReadOnly="True">
             <DataGrid.Resources>
                 <conv:ValueToBrushConverter x:Key="ValueToBrushConverter"/>
-                <Style TargetType="DataGridCell"  x:Key="DeltaCellStyle">
+                <Style x:Key="DeltaCellStyle" 
+                       TargetType="DataGridCell">  
                     <Setter Property="Foreground" Value="{Binding DeltaFixedVsActualPrice, Converter={StaticResource ValueToBrushConverter}}"/>
                 </Style>
 
-                <Style TargetType="{x:Type TextBlock}"  x:Key="PaddingFixLeft">
+                <Style x:Key="PaddingFixLeft"
+                       TargetType="{x:Type TextBlock}">
                     <Setter Property="Margin" Value="10 3"/>
                 </Style>
-                
-                <Style TargetType="{x:Type TextBlock}"  x:Key="PaddingFixRight" BasedOn="{StaticResource PaddingFixLeft}">
+
+                <Style x:Key="PaddingFixRight"
+                       TargetType="{x:Type TextBlock}"  
+                       BasedOn="{StaticResource PaddingFixLeft}">
                     <Setter Property="HorizontalAlignment" Value="Right" />
                 </Style>
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Product Id"  
-                                    Binding="{Binding Id}" 
+                <DataGridTextColumn Binding="{Binding Id}" 
                                     FontWeight="SemiBold"
-                                    ElementStyle="{StaticResource PaddingFixRight}"/>
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Product Id" ToolTip="Part Number"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Component Count" 
-                                    Binding="{Binding ComponentCount}"
-                                    ElementStyle="{StaticResource PaddingFixRight}"/>
+                <DataGridTextColumn Binding="{Binding ComponentCount}"
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Component Count" ToolTip="(Disregarding validity times)&#x0a;Number of components, purchased and manufactured, directly under ProductId."/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Fixed Price" 
-                                    Binding="{Binding FixedPrice, StringFormat=C2, ConverterCulture=sv-SE}" 
-                                    ElementStyle="{StaticResource PaddingFixRight}"/>
+                <DataGridTextColumn Binding="{Binding FixedPrice, StringFormat=C2, ConverterCulture=sv-SE}" 
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Fixed Price" ToolTip="Fixed Price, as is, directly from input price list."/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Calculated Price"  
-                                    Binding="{Binding CalculatedPrice, StringFormat=C2, ConverterCulture=sv-SE}"
-                                    ElementStyle="{StaticResource PaddingFixRight}"/>
+                <DataGridTextColumn Binding="{Binding CalculatedPrice, StringFormat=C2, ConverterCulture=sv-SE}"
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Calculated Price" ToolTip="Calculated Price.&#x0a;Summs all fixed prices of components on next level in Bill of Materials.&#x0a;If Fixed Price is missing or is zero it is recalculated using component prices in all levels of the Bill of Materials."/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Calculated Price Actual" 
-                                    Binding="{Binding CalculatedPriceActual, StringFormat=C2, ConverterCulture=sv-SE}"
-                                    ElementStyle="{StaticResource PaddingFixRight}"/>
-
-                <DataGridTextColumn Header="Fixed Vs Actual Price (%)"
-                                    Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P1}" 
+                <DataGridTextColumn Binding="{Binding CalculatedPriceActual, StringFormat=C2, ConverterCulture=sv-SE}"
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Calculated Price Actual" ToolTip="Calculated Price Actual.&#x0a;Sum of all prices from all Purchased parts in all levels in the Bill of materials. &#x0a;(All Manufactured parts are completely recalclulated.)"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P1}" 
                                     CellStyle="{StaticResource DeltaCellStyle}" 
-                                    ElementStyle="{StaticResource PaddingFixRight}" />
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Fixed Vs Actual Price (%)" ToolTip="Fixed Price Vs Calculated Price Actual (%)"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Contains Products Lacking Price" 
-                                    Binding="{Binding ContainsProductsLackingFixedPrice}"
-                                    ElementStyle="{StaticResource PaddingFixLeft}" />
+                <DataGridTextColumn Binding="{Binding ContainsProductsLackingFixedPrice}"
+                                    ElementStyle="{StaticResource PaddingFixLeft}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Contains Products Lacking Price" ToolTip="(Disregarding validity times)&#x0a;These are Products that is not in Price list or it's value is equal to Zero.&#x0a;Important to keep this blank to avoid calculation problems."/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

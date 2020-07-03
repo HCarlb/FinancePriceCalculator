@@ -78,6 +78,10 @@ namespace FinancePriceToolProject.ViewModels
         {
             _events.PublishOnUIThread(new GotoPageOneEvent(this));
         }
+        public void GotoPageThree()
+        {
+            _events.PublishOnUIThread(new GotoPageThreeEvent(this));
+        }
         public void BuildProductsHierarchy()
         {
             Globals.Products = CreateProducts();
