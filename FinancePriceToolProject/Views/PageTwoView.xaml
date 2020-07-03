@@ -67,74 +67,47 @@
                     </Style.Triggers>-->
                 </Style>
 
+                <Style TargetType="{x:Type TextBlock}"  x:Key="PaddingFixLeft">
+                    <Setter Property="Margin" Value="10 3"/>
+                </Style>
+                <Style TargetType="{x:Type TextBlock}"  x:Key="PaddingFixRight" BasedOn="{StaticResource PaddingFixLeft}">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                </Style>
+
             </DataGrid.Resources>
+
             <DataGrid.Columns>
+
                 <DataGridTextColumn Header="Product Id"  
                                     Binding="{Binding Id}" 
-                                    FontWeight="SemiBold">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter Property="Margin" Value="10 3"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                                    FontWeight="SemiBold"
+                                    ElementStyle="{StaticResource PaddingFixRight}"/>
+
                 <DataGridTextColumn Header="Component Count" 
-                                    Binding="{Binding ComponentCount}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter Property="Margin" Value="10 3"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                                    Binding="{Binding ComponentCount}"
+                                    ElementStyle="{StaticResource PaddingFixRight}"/>
+
                 <DataGridTextColumn Header="Fixed Price" 
-                                    Binding="{Binding FixedPrice, StringFormat=C2, ConverterCulture=sv-SE}" >
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter Property="Margin" Value="10 3"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                                    Binding="{Binding FixedPrice, StringFormat=C2, ConverterCulture=sv-SE}" 
+                                    ElementStyle="{StaticResource PaddingFixRight}"/>
+
                 <DataGridTextColumn Header="Calculated Price"  
-                                    Binding="{Binding CalculatedPrice, StringFormat=C2, ConverterCulture=sv-SE}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter Property="Margin" Value="10 3"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                                    Binding="{Binding CalculatedPrice, StringFormat=C2, ConverterCulture=sv-SE}"
+                                    ElementStyle="{StaticResource PaddingFixRight}"/>
+
                 <DataGridTextColumn Header="Calculated Price Actual" 
-                                    Binding="{Binding CalculatedPriceActual, StringFormat=C2, ConverterCulture=sv-SE}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter Property="Margin" Value="10 3"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                                    Binding="{Binding CalculatedPriceActual, StringFormat=C2, ConverterCulture=sv-SE}"
+                                    ElementStyle="{StaticResource PaddingFixRight}"/>
 
                 <DataGridTextColumn Header="Fixed Vs Actual Price (%)"
+                                    Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P1}" 
                                     CellStyle="{StaticResource DeltaCellStyle}" 
-                                    Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P1}" >
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter Property="Margin" Value="10 3"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                                    ElementStyle="{StaticResource PaddingFixRight}" />
+
                 <DataGridTextColumn Header="Contains Products Lacking Price" 
-                                    Binding="{Binding ContainsProductsLackingFixedPrice}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Left" />
-                            <Setter Property="Margin" Value="10 3"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                                    Binding="{Binding ContainsProductsLackingFixedPrice}"
+                                    ElementStyle="{StaticResource PaddingFixLeft}" />
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

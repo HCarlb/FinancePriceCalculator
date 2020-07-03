@@ -13,12 +13,15 @@ namespace FinancePriceToolProject.ViewModels
 {
     public class PageTwoViewModel : Screen, IHandle<GotoPageTwoEvent>
     {
+        #region Fields
         private readonly SimpleContainer _container;
         private readonly IEventAggregator _events;
         private object _dataGrid1ItemSource;
         private DateTime _targetDatePicker;
-
         private string _selectedDate;
+        #endregion
+
+        #region Properties
         public string SelectedDate
         {
             get
@@ -44,6 +47,7 @@ namespace FinancePriceToolProject.ViewModels
                 NotifyOfPropertyChange(() => DataGrid1ItemSource);
             }
         }
+
         public DateTime TargetDatePicker
         {
             get
@@ -56,8 +60,9 @@ namespace FinancePriceToolProject.ViewModels
                 NotifyOfPropertyChange(() => TargetDatePicker);
             }
         }
+        #endregion
 
-
+        #region Constructor
         public PageTwoViewModel(SimpleContainer container, IEventAggregator events)
         {
             _container = container;
@@ -66,6 +71,9 @@ namespace FinancePriceToolProject.ViewModels
             TargetDatePicker = DateTime.Now;
             
         }
+        #endregion
+
+        #region Methods
         public void GotoPageOne()
         {
             _events.PublishOnUIThread(new GotoPageOneEvent(this));
@@ -198,5 +206,7 @@ namespace FinancePriceToolProject.ViewModels
                 return decimal.Round(((value1 - value2) / value2), Settings.Default.DefaultRoundingDecimals);
             }
         }
+        #endregion
+
     }
 }
