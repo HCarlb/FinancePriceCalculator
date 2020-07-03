@@ -60,33 +60,81 @@
                 <conv:ValueToBrushConverter x:Key="ValueToBrushConverter"/>
                 <Style TargetType="DataGridCell"  x:Key="DeltaCellStyle">
                     <Setter Property="Foreground" Value="{Binding DeltaFixedVsActualPrice, Converter={StaticResource ValueToBrushConverter}}"/>
-                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <!--<Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FF635D5D" />
+                        </Trigger>
+                    </Style.Triggers>-->
                 </Style>
+
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Product Id"  
                                     Binding="{Binding Id}" 
-                                    FontWeight="SemiBold"/>
-                <DataGridTextColumn Header="Component Count" 
-                                    Binding="{Binding ComponentCount}"/>
-                <DataGridTextColumn Header="Fixed Material Price (Sek)" 
-                                    Binding="{Binding FixedPrice, StringFormat=C2, ConverterCulture=sv-SE}" />
-                <DataGridTextColumn Header="Calculated Price (Sek)"  
-                                    Binding="{Binding CalculatedPrice, StringFormat=C2, ConverterCulture=sv-SE}"/>
-                <DataGridTextColumn Header="Calculated Price Actual (Sek)" 
-                                    Binding="{Binding CalculatedPriceActual, StringFormat=C2, ConverterCulture=sv-SE}"/>
-                <DataGridTextColumn Header="Delta Fixed Vs Actual Price (%)"
-                                    CellStyle="{StaticResource DeltaCellStyle}" 
-                                    Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P}">
-                    <!--<DataGridTextColumn.ElementStyle>
+                                    FontWeight="SemiBold">
+                    <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Foreground" Value="{Binding DeltaFixedVsActualPrice, Converter={StaticResource ValueToBrushConverter}}"/>
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Margin" Value="10 3"/>
                         </Style>
-                    </DataGridTextColumn.ElementStyle>-->
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Contains Products Lacking Fixed Price" 
-                                    CellStyle="{StaticResource DataGridCellStyle3}" 
-                                    Binding="{Binding ContainsProductsLackingFixedPrice}"/>
+                <DataGridTextColumn Header="Component Count" 
+                                    Binding="{Binding ComponentCount}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Margin" Value="10 3"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Fixed Price" 
+                                    Binding="{Binding FixedPrice, StringFormat=C2, ConverterCulture=sv-SE}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Margin" Value="10 3"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Calculated Price"  
+                                    Binding="{Binding CalculatedPrice, StringFormat=C2, ConverterCulture=sv-SE}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Margin" Value="10 3"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Calculated Price Actual" 
+                                    Binding="{Binding CalculatedPriceActual, StringFormat=C2, ConverterCulture=sv-SE}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Margin" Value="10 3"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Fixed Vs Actual Price (%)"
+                                    CellStyle="{StaticResource DeltaCellStyle}" 
+                                    Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P1}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="Margin" Value="10 3"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Contains Products Lacking Price" 
+                                    Binding="{Binding ContainsProductsLackingFixedPrice}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="10 3"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
