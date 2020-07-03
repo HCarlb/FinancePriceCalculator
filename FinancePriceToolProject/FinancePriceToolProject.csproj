@@ -114,6 +114,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Converters\ValueToBrushConverter.cs" />
     <Compile Include="Events\GotoPageOneEvent.cs" />
     <Compile Include="Events\GotoPageTwoEvent.cs" />
     <Compile Include="Events\ZeroValuePurchasedPartFoundEvent.cs" />
@@ -215,7 +216,7 @@
   <Import Project="..\packages\Fody.6.2.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.2.0\build\Fody.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
