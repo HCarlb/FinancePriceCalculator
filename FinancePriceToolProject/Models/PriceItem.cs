@@ -8,9 +8,7 @@ namespace FinancePriceToolProject.Models
 {
     public class PriceItem
     {
-        public string LocationID { get; set; }
         public string ProductID { get; set; }
-        //public decimal StandardPrice { get; set; }
         public decimal MaterialPrice { get; set; }
 
     }

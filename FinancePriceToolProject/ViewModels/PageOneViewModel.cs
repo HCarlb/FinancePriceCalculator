@@ -241,9 +241,7 @@ namespace FinancePriceToolProject.ViewModels
             Globals.PriceData = (from p in prices
                                   select new PriceItem
                                   {
-                                      LocationID = Convert.ToString(p.Field<dynamic>("LocationID")),
                                       ProductID = Convert.ToString(p.Field<dynamic>("ProductID")),
-                                      //StandardPrice = Convert.ToDecimal(p.Field<dynamic>("StandardPrice")),
                                       MaterialPrice = Convert.ToDecimal(p.Field<dynamic>("MaterialPrice")),
                                   }).ToList();
 
