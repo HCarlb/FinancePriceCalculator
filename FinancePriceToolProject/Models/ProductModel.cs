@@ -10,14 +10,11 @@ namespace FinancePriceToolProject.Models
 {
     public class ProductModel 
     {
-        //private readonly SimpleContainer _container;
-        //private readonly IEventAggregator _events;
-
         public string Id { get; set; }
         public List<RelationModel> Relations { get; private set; } = new List<RelationModel>();
         public decimal FixedPrice { get; set; }
         public bool HasComponents => Relations.Count > 0;
-        public int ComponentCount => Relations.Count;   // Thihs is wrom
+        public int ComponentCount => Relations.Count;   // This is only calculation first level. Perhaps change that in a future release?
 
         public void AddChild(ProductModel product, decimal quantity, DateTime validFrom, DateTime validTo)
         {

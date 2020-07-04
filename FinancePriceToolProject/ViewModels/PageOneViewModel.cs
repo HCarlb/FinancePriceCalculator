@@ -205,12 +205,12 @@ namespace FinancePriceToolProject.ViewModels
 
         private void ProcessBomData()
         {
-            string ConvertLocationToLocationID(string location)
-            {
-                // Hardcoded fix
-                if (location.Trim().ToUpper() == "SKÖVDE") return "SE09";
-                return location;
-            }
+            //string ConvertLocationToLocationID(string location)
+            //{
+            //    // Hardcoded fix
+            //    if (location.Trim().ToUpper() == "SKÖVDE") return "SE09";
+            //    return location;
+            //}
 
             var bom = Globals.RawExcelBomFile.Tables[0].AsEnumerable();
 
@@ -218,7 +218,6 @@ namespace FinancePriceToolProject.ViewModels
             Globals.BomData = (from b in bom
                                select new BomItem
                                {
-                                   LocationID = ConvertLocationToLocationID(Convert.ToString(b.Field<dynamic>("ns2:Sender"))),
                                    ProductID = Convert.ToString(b.Field<dynamic>("ns4:Base")),
                                    ComponentID = Convert.ToString(b.Field<dynamic>("ns4:Base3")),
                                    ValidFromText = Convert.ToString(b.Field<dynamic>("ns3:ValidFrom")),
