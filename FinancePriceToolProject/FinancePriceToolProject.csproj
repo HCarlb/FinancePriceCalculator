@@ -120,7 +120,6 @@
     <Compile Include="Events\GotoPageThreeEvent.cs" />
     <Compile Include="Events\GotoPageTwoEvent.cs" />
     <Compile Include="Events\NegativePriceException.cs" />
-    <Compile Include="Events\ZeroValuePurchasedPartFoundEvent.cs" />
     <Compile Include="Forms\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
