@@ -1,16 +1,13 @@
 # FinancePriceCalculator
 
-A tool to calculate part prices through plain material prices 
-using a multilevel Bill of Material.
+A tool to calculate part prices through undelying prices 
+using a multilevel `Bill of Material`.
+Runs on Microsoft Windows machines and requires at least .NetFramework 4.7.2 to be installed.
+
 
 Created by Henrik Carlberg in 2020.
-Built with C# using WPF with MVVM design on **.NET Framework v4.7.2**.
+Built with C# using WPF with MVVM design.
 
 
-**Dependencies (NuGet):**
-- Caliburn.Micro v3.2.0
-- Caliburn.Micro.Core v3.2.0
-- Fody v6.2.0
-- Constura.Fody v4.1.0
-- ExcelDataReader v3.6.0
-- ExcelDataReader.DataSet v3.6.0
+*If you dont have .Net Installed you can download it here: *
+https://dotnet.microsoft.com/download/dotnet-framework
