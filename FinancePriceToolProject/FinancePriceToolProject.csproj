@@ -114,7 +114,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Converters\ValueToBrushConverter.cs" />
     <Compile Include="Events\GotoPageOneEvent.cs" />
+    <Compile Include="Events\GotoPageThreeEvent.cs" />
     <Compile Include="Events\GotoPageTwoEvent.cs" />
     <Compile Include="Events\ZeroValuePurchasedPartFoundEvent.cs" />
     <Compile Include="Forms\About.xaml.cs">
@@ -128,9 +130,13 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\RelationModel.cs" />
     <Compile Include="Models\ValidityQuantityModel.cs" />
+    <Compile Include="ViewModels\PageThreeViewModel.cs" />
     <Compile Include="ViewModels\PageTwoViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\PageOneViewModel.cs" />
+    <Compile Include="Views\PageThreeView.xaml.cs">
+      <DependentUpon>PageThreeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PageTwoView.xaml.cs">
       <DependentUpon>PageTwoView.xaml</DependentUpon>
     </Compile>
@@ -170,6 +176,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Forms\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PageThreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

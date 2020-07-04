@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FinancePriceToolProject.Views"
+             xmlns:conv="clr-namespace:FinancePriceToolProject.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -14,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>    
-        <StackPanel Grid.Column="0" Grid.Row="0" Background="#EEE" Margin="0 0 10 0">
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="#FFF6F6F6" Margin="0 0 10 0">
             <StackPanel Margin="10">
                 <Button x:Name="GotoPageOne" Content="&lt;&lt; Goto to previous page" Margin="0 0 0 30"/>
                 <TextBlock Text="3. Select target date:"/>
@@ -29,7 +30,7 @@
                 </WrapPanel>
                 <WrapPanel>
                     <TextBlock Text="Prices are calculated as the Bill of Material looks at" TextWrapping="Wrap"/>
-                    <TextBlock Text="{Binding SelectedDate}" FontWeight="SemiBold"  TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding SelectedDate, ConverterCulture=sv-SE}" FontWeight="SemiBold"  TextWrapping="Wrap"/>
                 </WrapPanel>
                 <Border BorderThickness="1" BorderBrush="DarkRed" CornerRadius="12"  Background="#FFFCFC95" Padding="10" Margin="0 50 0 0">
                     <WrapPanel TextBlock.Foreground="#FFD40000">
@@ -38,18 +39,8 @@
                     </WrapPanel>
                 </Border>
             </StackPanel>
+            <!--<Button Content="Go to next page" x:Name="GotoPageThree"/>-->
         </StackPanel>
-
-            <!--<DataGrid x:Name="dataGrid1" 
-                    Grid.Row="0" Grid.Column="1"
-                    ItemsSource="{Binding DataGrid1ItemSource}" 
-                    AutoGenerateColumns="True" 
-                    RowHeaderWidth="0" 
-                    HorizontalGridLinesBrush="{x:Null}" 
-                    VerticalGridLinesBrush="#FFAAAAAA" 
-                    AlternatingRowBackground="#FFE4E4E4" 
-                    GridLinesVisibility="Vertical" 
-                    CellStyle="{StaticResource DataGridCellStyle1}"/>-->
 
         <DataGrid x:Name="dataGrid1" 
                   Grid.Row="0" 
@@ -66,31 +57,76 @@
                   SelectionUnit="Cell"
                   FrozenColumnCount="1"
                   IsReadOnly="True">
-            <!-- CellStyle="{StaticResource DataGridCellStyle1}" -->
+            <DataGrid.Resources>
+                <conv:ValueToBrushConverter x:Key="ValueToBrushConverter"/>
+                <Style x:Key="DeltaCellStyle" 
+                       TargetType="DataGridCell">  
+                    <Setter Property="Foreground" Value="{Binding DeltaFixedVsActualPrice, Converter={StaticResource ValueToBrushConverter}}"/>
+                </Style>
 
-            <!--<DataGrid.Resources>
-                <Style x:Key="ProductIdColumnStyle" TargetType="DataGridCell">
-                    <Setter Property="FontWeight" Value="SemiBold"/>
-                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Style x:Key="PaddingFixLeft"
+                       TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="10 3"/>
                 </Style>
-                <Style x:Key="DefaultColumnStyle" TargetType="DataGridCell">
-                    <Setter Property="HorizontalAlignment" Value="Right"/>
-                    <Setter Property="Foreground" Value="Black"/>
+
+                <Style x:Key="PaddingFixRight"
+                       TargetType="{x:Type TextBlock}"  
+                       BasedOn="{StaticResource PaddingFixLeft}">
+                    <Setter Property="HorizontalAlignment" Value="Right" />
                 </Style>
-                <Style x:Key="LackingProductsColumnStyle" TargetType="DataGridCell">
-                    <Setter Property="HorizontalAlignment" Value="Left"/>
-                    <Setter Property="Foreground" Value="OrangeRed"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-            </DataGrid.Resources>-->
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Product Id" CellStyle="{StaticResource DataGridCellStyle1}" Binding="{Binding Id}" FontWeight="SemiBold"/>
-                <DataGridTextColumn Header="Component Count" CellStyle="{StaticResource DataGridCellStyle2}" Binding="{Binding ComponentCount}"/>
-                <DataGridTextColumn Header="Fixed Material Price (Sek)" CellStyle="{StaticResource DataGridCellStyle2}" Binding="{Binding FixedPrice, StringFormat=C2, ConverterCulture=sv-SE}"/>
-                <DataGridTextColumn Header="Calculated Price (Sek)" CellStyle="{StaticResource DataGridCellStyle2}" Binding="{Binding CalculatedPrice, StringFormat=C2, ConverterCulture=sv-SE}"/>
-                <DataGridTextColumn Header="Calculated Price Actual (Sek)" CellStyle="{StaticResource DataGridCellStyle2}" Binding="{Binding CalculatedPriceActual, StringFormat=C2, ConverterCulture=sv-SE}"/>
-                <DataGridTextColumn Header="Delta Fixed Vs Actual Price (%)" CellStyle="{StaticResource DataGridCellStyle2}" Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P}"/>
-                <DataGridTextColumn Header="Contains Products Lacking Fixed Price" CellStyle="{StaticResource DataGridCellStyle3}" Binding="{Binding ContainsProductsLackingFixedPrice}"/>
+                <DataGridTextColumn Binding="{Binding Id}" 
+                                    FontWeight="SemiBold"
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Product Id" ToolTip="Part Number"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding ComponentCount}"
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Component Count" ToolTip="(Disregarding validity times)&#x0a;Number of components, purchased and manufactured, directly under ProductId."/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding FixedPrice, StringFormat=C2, ConverterCulture=sv-SE}" 
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Fixed Price" ToolTip="Fixed Price, as is, directly from input price list."/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding CalculatedPrice, StringFormat=C2, ConverterCulture=sv-SE}"
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Calculated Price" ToolTip="Calculated Price.&#x0a;Summs all fixed prices of components on next level in Bill of Materials.&#x0a;If Fixed Price is missing or is zero it is recalculated using component prices in all levels of the Bill of Materials."/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding CalculatedPriceActual, StringFormat=C2, ConverterCulture=sv-SE}"
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Calculated Price Actual" ToolTip="Calculated Price Actual.&#x0a;Sum of all prices from all Purchased parts in all levels in the Bill of materials. &#x0a;(All Manufactured parts are completely recalclulated.)"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P1, ConverterCulture=sv-SE}" 
+                                    CellStyle="{StaticResource DeltaCellStyle}" 
+                                    ElementStyle="{StaticResource PaddingFixRight}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Fixed Vs Actual Price (%)" ToolTip="Fixed Price Vs Calculated Price Actual (%)"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding ContainsProductsLackingFixedPrice}"
+                                    ElementStyle="{StaticResource PaddingFixLeft}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Contains Products Lacking Price" ToolTip="(Disregarding validity times)&#x0a;These are Products that is not in Price list or it's value is equal to Zero.&#x0a;Important to keep this blank to avoid calculation problems."/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

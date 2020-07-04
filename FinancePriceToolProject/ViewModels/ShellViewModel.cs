@@ -10,15 +10,16 @@ using System.Threading.Tasks;
 
 namespace FinancePriceToolProject.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<GotoPageOneEvent>, IHandle<GotoPageTwoEvent>
+    public class ShellViewModel : Conductor<object>, IHandle<GotoPageOneEvent>, IHandle<GotoPageTwoEvent>, IHandle<GotoPageThreeEvent>
 	{
 
         private readonly SimpleContainer _container;
 		private IEventAggregator _events;
 		private PageOneViewModel _pageOne;
 		private PageTwoViewModel _pageTwo;
+        private PageThreeViewModel _pageThree;
 
-		public string FormTitle
+        public string FormTitle
 		{
 			// Dynamic Form Title
 			get
@@ -29,12 +30,13 @@ namespace FinancePriceToolProject.ViewModels
 		}
 
 
-		public ShellViewModel(IEventAggregator events, SimpleContainer container, PageOneViewModel startPage , PageTwoViewModel pageTwo)
+		public ShellViewModel(IEventAggregator events, SimpleContainer container, PageOneViewModel startPage , PageTwoViewModel pageTwo, PageThreeViewModel pageThree)
 		{
 
 			_container = container;
 			_pageOne = startPage;
 			_pageTwo = pageTwo;
+			_pageThree = pageThree;
 
 			// Subscribe to events sent from the ViewModels
 			_events = events;
@@ -55,8 +57,9 @@ namespace FinancePriceToolProject.ViewModels
 			ActivateItem(_pageTwo);
 		}
 
-
-
-
+        public void Handle(GotoPageThreeEvent message)
+        {
+			ActivateItem(_pageThree);
+		}
     }
 }
