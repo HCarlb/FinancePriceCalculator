@@ -17,7 +17,7 @@ namespace FinancePriceToolProject.ViewModels
 {
     public class PageOneViewModel : Screen, IHandle<GotoPageOneEvent>
     {
-
+        #region Fields
         private readonly SimpleContainer _container;
         private readonly IEventAggregator _events;
         private string _bomFileSelected;
@@ -25,6 +25,7 @@ namespace FinancePriceToolProject.ViewModels
         private string _pricesFileSelected;
         private int _priceFileRows;
         private int _bomFileRows;
+        #endregion
 
         #region Properties
         public int BomFileRows
@@ -102,7 +103,7 @@ namespace FinancePriceToolProject.ViewModels
         }
         #endregion
 
-        // Methods
+        #region Constructor
         public PageOneViewModel(SimpleContainer container, IEventAggregator events)
         {
             _container = container;
@@ -111,7 +112,9 @@ namespace FinancePriceToolProject.ViewModels
 
             TargetDate = DateTime.Now;
         }
+        #endregion
 
+        #region Methods
         public void SelectBomFile()
         {
             string newFile = Filebrowser.GetExcelFileName("Select Bill of Materials file");
@@ -136,7 +139,7 @@ namespace FinancePriceToolProject.ViewModels
                 catch (Exception ex)
                 {
                     // Give the user a notice about the error
-                    string mbText = $"Could not process data\n\nError:\n{ex.Message}";
+                    string mbText = $"Could not process Bill of Materials data\n\nError:\n{ex.Message}";
 
                     MessageBox.Show(
                         messageBoxText: mbText,
@@ -147,7 +150,6 @@ namespace FinancePriceToolProject.ViewModels
                 }
             }
         }
-
         public void ShowReadFileMessage(Exception ex)
         {
             // Give the user a notice about the error
@@ -161,10 +163,9 @@ namespace FinancePriceToolProject.ViewModels
             );
 
         }
-
         public void SelectPricesFile()
         {
-            string newFile = newFile = Filebrowser.GetExcelFileName("Select Prices file");
+            string newFile = Filebrowser.GetExcelFileName("Select Prices file");
 
             if (newFile.Length > 0)
             {
@@ -186,7 +187,7 @@ namespace FinancePriceToolProject.ViewModels
                 catch (Exception ex)
                 {
                     // Give the user a notice about the error
-                    string mbText = $"Could not process data\n\nError:\n{ex.Message}";
+                    string mbText = $"Could not process Prices data\n\nError:\n{ex.Message}";
 
                     MessageBox.Show(
                         messageBoxText: mbText,
@@ -197,21 +198,12 @@ namespace FinancePriceToolProject.ViewModels
                 }
             }
         }
-
         public void GotoPageTwo()
         {
             _events.PublishOnUIThread(new GotoPageTwoEvent(this));
         }
-
         private void ProcessBomData()
         {
-            //string ConvertLocationToLocationID(string location)
-            //{
-            //    // Hardcoded fix
-            //    if (location.Trim().ToUpper() == "SKÖVDE") return "SE09";
-            //    return location;
-            //}
-
             var bom = Globals.RawExcelBomFile.Tables[0].AsEnumerable();
 
             // Convert the read data into a List of BomItems
@@ -227,10 +219,6 @@ namespace FinancePriceToolProject.ViewModels
 
             BomFileRows = Globals.BomData.Count;
         }
-        public string GetText()
-        {
-            return $"asdad {BomFileRows} asdad";
-        }
         private void ProcessPriceData()
         {
             // Read excelfile and extract the first sheet as IEnumerable to make it work with LINQ
@@ -241,22 +229,29 @@ namespace FinancePriceToolProject.ViewModels
                                   select new PriceItem
                                   {
                                       ProductID = Convert.ToString(p.Field<dynamic>("ProductID")),
-                                      MaterialPrice = Convert.ToDecimal(p.Field<dynamic>("MaterialPrice")),
+                                      UnitPrice = Convert.ToDecimal(p.Field<dynamic>("MaterialPrice")),
                                   }).ToList();
-
+            ValidatePriceData();
             PriceFileRows = Globals.PriceData.Count;
         }
-
-
         public void ShowAbout()
         {
-            var x = new About();
-            x.ShowDialog();
+            new About().ShowDialog();
         }
-
+        private void ValidatePriceData()
+        {
+            var productsWithNegativePrice = Globals.PriceData.Where(x => x.UnitPrice < 0);
+            if (productsWithNegativePrice.Count() > 0)
+            {
+                var negativeProductsString = String.Join(",", productsWithNegativePrice.Select(p => p.ProductID).ToArray());
+                throw new NegativePriceException($"Product(s) [{negativeProductsString}] has a price < 0 which is not allowed.");
+            }
+            var s = Globals.PriceData.Where(x => x.UnitPrice < 0).Select(p => p.ProductID).ToArray();
+        }
         public void Handle(GotoPageOneEvent message)
         {
             //If needed, do something here when entering this page.
         }
+        #endregion
     }
 }

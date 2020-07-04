@@ -9,7 +9,7 @@ namespace FinancePriceToolProject.Models
     public class PriceItem
     {
         public string ProductID { get; set; }
-        public decimal MaterialPrice { get; set; }
+        public decimal UnitPrice { get; set; }
 
     }
 }

@@ -10,12 +10,15 @@ namespace FinancePriceToolProject.Models
 {
     public class ProductModel 
     {
+        #region Properties
         public string Id { get; set; }
         public List<RelationModel> Relations { get; private set; } = new List<RelationModel>();
         public decimal FixedPrice { get; set; }
         public bool HasComponents => Relations.Count > 0;
         public int ComponentCount => Relations.Count;   // This is only calculation first level. Perhaps change that in a future release?
+        #endregion
 
+        #region Methods
         public void AddChild(ProductModel product, decimal quantity, DateTime validFrom, DateTime validTo)
         {
             RelationModel newRelation;
@@ -89,12 +92,7 @@ namespace FinancePriceToolProject.Models
                 }
                 else
                 {
-                    // If value is zero give the app the information if it wants it.
-                    if (relation.Product.FixedPrice <= 0)
-                    {
-                       // _events.PublishOnUIThread(new ZeroValuePurchasedPartFoundEvent { ProductId = relation.Product.Id });
-                    } 
-                    else
+                    if (relation.Product.FixedPrice > 0)
                     {
                         sumPrice += relation.Product.FixedPrice * quantity;
                     }
@@ -129,6 +127,7 @@ namespace FinancePriceToolProject.Models
             }
             return pp;
         }
-        
+        #endregion
+
     }
 }

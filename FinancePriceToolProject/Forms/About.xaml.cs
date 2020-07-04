@@ -34,6 +34,7 @@ namespace FinancePriceToolProject.Forms
             // Open the link in default web browser.
             Process.Start(new ProcessStartInfo(url));
             e.Handled = true;
+            this.Close();
         }
     }
 }

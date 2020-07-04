@@ -12,13 +12,15 @@ namespace FinancePriceToolProject.ViewModels
 {
     public class ShellViewModel : Conductor<object>, IHandle<GotoPageOneEvent>, IHandle<GotoPageTwoEvent>, IHandle<GotoPageThreeEvent>
 	{
-
+        #region Fields
         private readonly SimpleContainer _container;
 		private IEventAggregator _events;
 		private PageOneViewModel _pageOne;
 		private PageTwoViewModel _pageTwo;
         private PageThreeViewModel _pageThree;
+        #endregion
 
+        #region Properties
         public string FormTitle
 		{
 			// Dynamic Form Title
@@ -28,8 +30,9 @@ namespace FinancePriceToolProject.ViewModels
 				return $"{versionInfo.ProductName} version {versionInfo.FileVersion} - {versionInfo.LegalCopyright}";
 			}
 		}
+		#endregion
 
-
+		#region Constructor
 		public ShellViewModel(IEventAggregator events, SimpleContainer container, PageOneViewModel startPage , PageTwoViewModel pageTwo, PageThreeViewModel pageThree)
 		{
 
@@ -46,20 +49,21 @@ namespace FinancePriceToolProject.ViewModels
 			// Load the default start page
 			ActivateItem(_pageOne);
 		}
+        #endregion
 
-		public void Handle(GotoPageOneEvent message)
+        #region Navigation
+        public void Handle(GotoPageOneEvent message)
 		{
 			ActivateItem(_pageOne);
 		}
-
 		public void Handle(GotoPageTwoEvent message)
         {
 			ActivateItem(_pageTwo);
 		}
-
         public void Handle(GotoPageThreeEvent message)
         {
 			ActivateItem(_pageThree);
 		}
-    }
+		#endregion
+	}
 }

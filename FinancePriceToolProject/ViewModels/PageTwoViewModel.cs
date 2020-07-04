@@ -69,11 +69,12 @@ namespace FinancePriceToolProject.ViewModels
             _events = events;
             _events.Subscribe(this);
             TargetDatePicker = DateTime.Now;
-            
+
         }
         #endregion
 
         #region Methods
+        #region Navigation
         public void GotoPageOne()
         {
             _events.PublishOnUIThread(new GotoPageOneEvent(this));
@@ -82,6 +83,12 @@ namespace FinancePriceToolProject.ViewModels
         {
             _events.PublishOnUIThread(new GotoPageThreeEvent(this));
         }
+        public void Handle(GotoPageTwoEvent message)
+        {
+            BuildProductsHierarchy();
+        }
+        #endregion
+
         public void BuildProductsHierarchy()
         {
             Globals.Products = CreateProducts();
@@ -160,15 +167,9 @@ namespace FinancePriceToolProject.ViewModels
         {
             return Globals.PriceData
                 .Where(x => x.ProductID == product)
-                .Select(x => x.MaterialPrice)
+                .Select(x => x.UnitPrice)
                 .SingleOrDefault();
         }
-        public void Handle(GotoPageTwoEvent message)
-        {
-            BuildProductsHierarchy();
-        }
-
-
         public void CreateDataGridContent()
         {
             DateTime targetDate = TargetDatePicker.Date;
@@ -198,7 +199,6 @@ namespace FinancePriceToolProject.ViewModels
 
             DataGrid1ItemSource = isource;
         }
-
         public decimal ToPercetile(decimal value1, decimal value2)
         {
             if (value2 == 0)

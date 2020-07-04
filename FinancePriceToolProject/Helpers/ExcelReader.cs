@@ -12,16 +12,21 @@ namespace FinancePriceToolProject.Helpers
     public static class ExcelReader
     {
 
+        /// <summary>
+        /// Reads Excel files into a DataSet which is retured.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static DataSet ExcelToDataSet(string fileName)
         {
             IExcelDataReader reader;
             DataSet dataSet;
 
-            using (var stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
+            using (FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
             {
                 reader = ExcelReaderFactory.CreateReader(stream);
 
-                var conf = new ExcelDataSetConfiguration
+                ExcelDataSetConfiguration conf = new ExcelDataSetConfiguration
                 {
                     ConfigureDataTable = _ => new ExcelDataTableConfiguration
                     {

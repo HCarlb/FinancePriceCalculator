@@ -119,6 +119,7 @@
     <Compile Include="Events\GotoPageOneEvent.cs" />
     <Compile Include="Events\GotoPageThreeEvent.cs" />
     <Compile Include="Events\GotoPageTwoEvent.cs" />
+    <Compile Include="Events\NegativePriceException.cs" />
     <Compile Include="Events\ZeroValuePurchasedPartFoundEvent.cs" />
     <Compile Include="Forms\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -229,7 +230,7 @@
   <Import Project="..\packages\Fody.6.2.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.2.0\build\Fody.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
