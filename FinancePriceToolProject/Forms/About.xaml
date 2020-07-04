@@ -5,30 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinancePriceToolProject.Forms"
         mc:Ignorable="d"
-        Title="About" Height="250" Width="440" ResizeMode="NoResize" Topmost="True" FontSize="14" Icon="/Finance Price Calculation Tool;component/Resources/Money.png">
+        Title="About" Height="290" Width="470" 
+        ResizeMode="NoResize" 
+        Topmost="True" 
+        FontSize="14" 
+        Icon="/Finance Price Calculation Tool;component/Resources/Money.png">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="310"/>
+            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBlock Text="This app was created by "/>
-            <TextBlock Text="Henrik Carlberg &lt;henrikcarlberg@outlook.com&gt;" FontWeight="SemiBold"/>
-            <TextBlock Text="in June 2020."/>
-            <TextBlock Text="Use it on your own risk. No warranties given." Margin="0 20 0 0" Foreground="Red" Background="Yellow" Padding="10 5"/>
-        </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="3">
-            <TextBlock Text="Source Code Available at"/>
-            <TextBlock Text="https://github.com/HCarlb/FinancePriceCalculator" Foreground="Blue"/>
+        <!--Image dollar sign-->
+        <Image Source="/Resources/dollar.png" Grid.Column="1" Grid.Row="1"  Grid.RowSpan="2"/>
+        <DockPanel Grid.Column="3" Grid.Row="1">
+            <WrapPanel>
+                <TextBlock Text="This OpenSource application was originally created by " TextWrapping="Wrap"/>
+                <TextBlock Text="Henrik Carlberg &lt;henrikcarlberg@outlook.com&gt;" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                <TextBlock Text="in June 2020." TextWrapping="Wrap"/>
+ 
+            </WrapPanel>
+
+        </DockPanel>
+        <WrapPanel  Grid.Column="3" Grid.Row="2">
+            <TextBlock Text="Use this app on your own risk.&#x0a;No warranties given." Foreground="#FFE50101" FontWeight="Bold" FontSize="16" TextWrapping="Wrap"/>
+        </WrapPanel>
+        
+        <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3">
+            <TextBlock Text="Full Source Code and new Releases are made available at" FontStyle="Italic" Foreground="DarkGray"/>
+
+            <!-- Navigation Url -->
+            <TextBlock>
+                <Hyperlink NavigateUri="https://github.com/HCarlb/FinancePriceCalculator" Click="GotoWebPage_Click">
+                    https://github.com/HCarlb/FinancePriceCalculator
+                </Hyperlink>
+            </TextBlock>
         </StackPanel>
 
 

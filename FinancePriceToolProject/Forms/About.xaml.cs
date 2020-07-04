@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,17 @@ namespace FinancePriceToolProject.Forms
         public About()
         {
             InitializeComponent();
+        }
+
+        private void GotoWebPage_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the link from the sender
+            Hyperlink link = (Hyperlink)sender;
+            string url = link.NavigateUri.ToString();
+
+            // Open the link in default web browser.
+            Process.Start(new ProcessStartInfo(url));
+            e.Handled = true;
         }
     }
 }
