@@ -5,7 +5,6 @@ using a multilevel `Bill of Material`.
 Runs on `Microsoft Windows` machines and requires at least `.NetFramework 4.7.2` to be installed.
 
 
-Created by Henrik Carlberg in 2020.
 Built with C# using WPF with MVVM design.
 
 
