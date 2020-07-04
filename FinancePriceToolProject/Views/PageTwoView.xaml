@@ -112,8 +112,8 @@
                         <TextBlock Text="Calculated Price Actual" ToolTip="Calculated Price Actual.&#x0a;Sum of all prices from all Purchased parts in all levels in the Bill of materials. &#x0a;(All Manufactured parts are completely recalclulated.)"/>
                     </DataGridTextColumn.Header>
                 </DataGridTextColumn>
-                
-                <DataGridTextColumn Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P1}" 
+
+                <DataGridTextColumn Binding="{Binding DeltaFixedVsActualPrice, StringFormat=P1, ConverterCulture=sv-SE}" 
                                     CellStyle="{StaticResource DeltaCellStyle}" 
                                     ElementStyle="{StaticResource PaddingFixRight}">
                     <DataGridTextColumn.Header>

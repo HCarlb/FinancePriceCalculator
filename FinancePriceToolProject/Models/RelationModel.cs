@@ -14,10 +14,14 @@ namespace FinancePriceToolProject.Models
 
         public decimal GetQuantity(DateTime targetDate)
         {
-            return ValidityQuantities
-                    .Where(x => x.StartDate <= targetDate && targetDate < x.EndDate)
-                    .Sum(x => x.Quantity);
+            return GetValidityQuantitiesByDate(targetDate).Sum(x => x.Quantity);
         }
 
+        public List<ValidityQuantityModel> GetValidityQuantitiesByDate(DateTime targetDate)
+        {
+            return ValidityQuantities
+                    .Where(x => x.StartDate <= targetDate && targetDate < x.EndDate)
+                    .ToList();
+        }
     }
 }

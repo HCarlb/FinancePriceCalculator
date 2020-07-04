@@ -92,7 +92,7 @@ namespace FinancePriceToolProject.Models
                 }
                 else
                 {
-                    // If value is zero give the app th information if it wants it.
+                    // If value is zero give the app the information if it wants it.
                     if (relation.Product.FixedPrice <= 0)
                     {
                        // _events.PublishOnUIThread(new ZeroValuePurchasedPartFoundEvent { ProductId = relation.Product.Id });
@@ -106,40 +106,21 @@ namespace FinancePriceToolProject.Models
             return sumPrice;
         }
 
-        //public int GetComponentsAsParentsCount(DateTime targetDate)
-        //{
-        //    int count = 0;
-        //    foreach (var relation in Relations)
-        //    {
-        //        // As purchased parts cant have any calculated value, make sure to pull the fixed price instead.
-        //        if (relation.Product.HasComponents)
-        //        {
-        //            count++;
-        //        }
-        //    }
-        //    return count;
-        //}
-
-
         public List<string> GetSubProductsLackingPrice()
         {
             List<string> productsLackingFixedPrice = Relations
                 .Where(r => r.Product.FixedPrice <= 0)
                 .Select(p=>p.Product.Id)
                 .OrderByDescending(c => c)
-                //.ToArray();
                 .ToList();
             List<string> subproductslack = this.GetSubSubProductsLackingPrice();
 
-            //return String.Join("; ", productsLackingFixedPrice);
             return productsLackingFixedPrice
                 .Concat(subproductslack)
                 .Distinct()
                 .OrderBy(x => x)
                 .ToList();
         }
-
-
 
         public List<string> GetSubSubProductsLackingPrice()
         {
