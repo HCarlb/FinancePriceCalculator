@@ -1,15 +1,15 @@
-﻿<Window x:Class="FinancePriceToolProject.Forms.About"
+﻿<Window x:Class="FinancePriceToolProject.Views.AboutView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FinancePriceToolProject.Forms"
+        xmlns:local="clr-namespace:FinancePriceToolProject.Views"
+        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="About" Height="290" Width="470" 
-        ResizeMode="NoResize" 
-        Topmost="True" 
-        FontSize="14" 
-        Icon="/Finance Price Calculation Tool;component/Resources/Money.png">
+        Title="{Binding FormTitle}" Height="300" Width="470" 
+        Topmost="True" WindowStartupLocation="CenterOwner" FontSize="14"
+        Icon="/Finance Price Calculation Tool;component/Resources/MoneyIcon.ico" 
+        WindowStyle="ToolWindow" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -34,25 +34,29 @@
                 <TextBlock Text="This OpenSource application was originally created by " TextWrapping="Wrap"/>
                 <TextBlock Text="Henrik Carlberg &lt;henrikcarlberg@outlook.com&gt;" FontWeight="SemiBold" TextWrapping="Wrap"/>
                 <TextBlock Text="in June 2020." TextWrapping="Wrap"/>
- 
+
             </WrapPanel>
 
         </DockPanel>
         <WrapPanel  Grid.Column="3" Grid.Row="2">
             <TextBlock Text="Use this app on your own risk.&#x0a;No warranties given." Foreground="#FFE50101" FontWeight="Bold" FontSize="16" TextWrapping="Wrap"/>
         </WrapPanel>
-        
+
         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3">
-            <TextBlock Text="Full Source Code and new Releases are made available at" FontStyle="Italic" Foreground="DarkGray"/>
+            <TextBlock Text="Full Source Code and new Releases are made available at" FontStyle="Italic" Foreground="DarkGray" Margin="3 0 0 0"/>
 
             <!-- Navigation Url -->
-            <TextBlock>
-                <Hyperlink NavigateUri="https://github.com/HCarlb/FinancePriceCalculator" Click="GotoWebPage_Click">
-                    https://github.com/HCarlb/FinancePriceCalculator
-                </Hyperlink>
-            </TextBlock>
+            <WrapPanel>
+                <Button x:Name="FollowHyperlink" Content="{Binding GithubUrl, Mode=OneTime}" Padding="2 0" BorderThickness="0"
+                        Background="Transparent" BorderBrush="Transparent" Foreground="#FF005CB9"/>
+            </WrapPanel>
+            <Button x:Name="CloseAboutForm" Content="Close" Margin="0 15 0 0"/>
         </StackPanel>
 
 
     </Grid>
+
+
+
+
 </Window>

@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using FinancePriceToolProject.Events;
+using FinancePriceToolProject.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,29 +15,23 @@ namespace FinancePriceToolProject.ViewModels
 	{
         #region Fields
         private readonly SimpleContainer _container;
-		private IEventAggregator _events;
+        private IWindowManager _windowManager;
+        private IEventAggregator _events;
 		private PageOneViewModel _pageOne;
 		private PageTwoViewModel _pageTwo;
         private PageThreeViewModel _pageThree;
-        #endregion
+		#endregion
 
-        #region Properties
-        public string FormTitle
-		{
-			// Dynamic Form Title
-			get
-			{
-				var versionInfo = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
-				return $"{versionInfo.ProductName} version {versionInfo.FileVersion} - {versionInfo.LegalCopyright}";
-			}
-		}
+		#region Properties
+		public string FormTitle => FormTitleHelper.FormTitleWithCopyright;
 		#endregion
 
 		#region Constructor
-		public ShellViewModel(IEventAggregator events, SimpleContainer container, PageOneViewModel startPage , PageTwoViewModel pageTwo, PageThreeViewModel pageThree)
+		public ShellViewModel(IWindowManager windowManager, IEventAggregator events, SimpleContainer container, PageOneViewModel startPage , PageTwoViewModel pageTwo, PageThreeViewModel pageThree)
 		{
 
 			_container = container;
+			_windowManager = windowManager;
 			_pageOne = startPage;
 			_pageTwo = pageTwo;
 			_pageThree = pageThree;
@@ -62,7 +57,7 @@ namespace FinancePriceToolProject.ViewModels
 		}
         public void Handle(GotoPageThreeEvent message)
         {
-			ActivateItem(_pageThree);
+			_windowManager.ShowDialog(new AboutViewModel());
 		}
 		#endregion
 	}

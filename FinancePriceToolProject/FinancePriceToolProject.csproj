@@ -132,22 +132,24 @@
     <Compile Include="Events\GotoPageThreeEvent.cs" />
     <Compile Include="Events\GotoPageTwoEvent.cs" />
     <Compile Include="Events\NegativePriceException.cs" />
-    <Compile Include="Forms\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Globals.cs" />
     <Compile Include="Helpers\CsvTools.cs" />
     <Compile Include="Helpers\ExcelReader.cs" />
     <Compile Include="Helpers\Filebrowser.cs" />
+    <Compile Include="Helpers\FormTitleHelper.cs" />
     <Compile Include="Models\BomItem.cs" />
     <Compile Include="Models\PriceItem.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\RelationModel.cs" />
     <Compile Include="Models\ValidityQuantityModel.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\PageThreeViewModel.cs" />
     <Compile Include="ViewModels\PageTwoViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\PageOneViewModel.cs" />
+    <Compile Include="Views\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PageThreeView.xaml.cs">
       <DependentUpon>PageThreeView.xaml</DependentUpon>
     </Compile>
@@ -189,7 +191,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Forms\About.xaml">
+    <Page Include="Views\AboutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,7 +244,7 @@
   <Import Project="..\packages\Fody.6.2.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.2.0\build\Fody.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -94,5 +94,14 @@ namespace FinancePriceToolProject.Properties {
                 return ((int)(this["ExtendedRoundingDecimals"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/HCarlb/FinancePriceCalculator")]
+        public string AppGithubUrl {
+            get {
+                return ((string)(this["AppGithubUrl"]));
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
 using FinancePriceToolProject.Events;
-using FinancePriceToolProject.Forms;
 using FinancePriceToolProject.Helpers;
 using FinancePriceToolProject.Models;
 using Microsoft.Win32;
@@ -198,10 +197,6 @@ namespace FinancePriceToolProject.ViewModels
                 }
             }
         }
-        public void GotoPageTwo()
-        {
-            _events.PublishOnUIThread(new GotoPageTwoEvent(this));
-        }
         private void ProcessBomData()
         {
             var bom = Globals.RawExcelBomFile.Tables[0].AsEnumerable();
@@ -234,10 +229,6 @@ namespace FinancePriceToolProject.ViewModels
             ValidatePriceData();
             PriceFileRows = Globals.PriceData.Count;
         }
-        public void ShowAbout()
-        {
-            new About().ShowDialog();
-        }
         private void ValidatePriceData()
         {
             var productsWithNegativePrice = Globals.PriceData.Where(x => x.UnitPrice < 0);
@@ -251,6 +242,18 @@ namespace FinancePriceToolProject.ViewModels
         public void Handle(GotoPageOneEvent message)
         {
             //If needed, do something here when entering this page.
+        }
+        #endregion
+
+        #region Navigation
+        public void GotoPageTwo()
+        {
+            _events.PublishOnUIThread(new GotoPageTwoEvent(this));
+        }
+        public void ShowAbout()
+        {
+            //new About().ShowDialog();
+            _events.PublishOnUIThread(new GotoPageThreeEvent(this));
         }
         #endregion
     }
