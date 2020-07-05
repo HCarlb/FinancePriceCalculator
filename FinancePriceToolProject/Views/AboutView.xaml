@@ -6,10 +6,9 @@
         xmlns:local="clr-namespace:FinancePriceToolProject.Views"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="{Binding FormTitle}" Height="300" Width="470" 
-        Topmost="True" WindowStartupLocation="CenterOwner" FontSize="14"
+        Title="{Binding FormTitle}" Height="300" Width="470" WindowStartupLocation="CenterOwner" FontSize="14"
         Icon="/Finance Price Calculation Tool;component/Resources/MoneyIcon.ico" 
-        WindowStyle="ToolWindow" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+        WindowStyle="ToolWindow" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Background="#FFF1F1F1" ShowInTaskbar="False">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -43,7 +42,7 @@
         </WrapPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3">
-            <TextBlock Text="Full Source Code and new Releases are made available at" FontStyle="Italic" Foreground="DarkGray" Margin="3 0 0 0"/>
+            <TextBlock Text="Full Source Code and new Releases are made available at" FontStyle="Italic" Foreground="DimGray" Margin="3 0 0 0"/>
 
             <!-- Navigation Url -->
             <WrapPanel>
