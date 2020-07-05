@@ -2,12 +2,16 @@
 using FinancePriceToolProject.Events;
 using FinancePriceToolProject.Models;
 using FinancePriceToolProject.Properties;
+using FinancePriceToolProject.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using Microsoft.Win32;
+using System.Windows;
 
 namespace FinancePriceToolProject.ViewModels
 {
@@ -18,10 +22,12 @@ namespace FinancePriceToolProject.ViewModels
         private readonly IEventAggregator _events;
         private object _dataGrid1ItemSource;
         private DateTime _targetDatePicker;
+        private DateTime _lastSelectedDate;
         private string _selectedDate;
         #endregion
 
         #region Properties
+        public bool CanWriteTableToCsv => DataGrid1ItemSource != null;
         public string SelectedDate
         {
             get
@@ -45,6 +51,7 @@ namespace FinancePriceToolProject.ViewModels
             {
                 _dataGrid1ItemSource = value;
                 NotifyOfPropertyChange(() => DataGrid1ItemSource);
+                NotifyOfPropertyChange(() => CanWriteTableToCsv);
             }
         }
 
@@ -58,6 +65,7 @@ namespace FinancePriceToolProject.ViewModels
             {
                 _targetDatePicker = value;
                 NotifyOfPropertyChange(() => TargetDatePicker);
+                NotifyOfPropertyChange(() => CanWriteTableToCsv);
             }
         }
         #endregion
@@ -173,12 +181,13 @@ namespace FinancePriceToolProject.ViewModels
         public void CreateDataGridContent()
         {
             DateTime targetDate = TargetDatePicker.Date;
-            CultureInfo culture = CultureInfo.CreateSpecificCulture(Settings.Default.ApplicationSpecificCulture);
-            string displayFormat = Settings.Default.CurrencyDisplayFormat;
+            //CultureInfo culture = CultureInfo.CreateSpecificCulture(Settings.Default.ApplicationSpecificCulture);
+            //string displayFormat = Settings.Default.CurrencyDisplayFormat;
             string separator = Settings.Default.CsvSeparator + " ";
 
 
             SelectedDate = targetDate.ToLongDateString();
+            _lastSelectedDate = targetDate;
             var isource = (from p in Globals.Products
                            where p.HasComponents == true
                            select new
@@ -190,11 +199,6 @@ namespace FinancePriceToolProject.ViewModels
                                CalculatedPriceActual = decimal.Round(p.GetCalculatedPriceActual(targetDate),Settings.Default.DefaultRoundingDecimals),
                                DeltaFixedVsActualPrice = decimal.Round(ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)), Settings.Default.DefaultRoundingDecimals),
                                ContainsProductsLackingFixedPrice = String.Join(separator, p.GetSubProductsLackingPrice().ToArray()),
-                               //FixedPrice = p.FixedPrice.ToString(displayFormat, culture),
-                               //CalculatedPrice = p.GetCalculatedPrice(targetDate).ToString(displayFormat, culture),
-                               //CalculatedPriceActual = p.GetCalculatedPriceActual(targetDate).ToString(displayFormat, culture),
-                               //DeltaFixedVsActualPrice = ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)),
-                               //p.HasComponents
                            }).ToList();
 
             DataGrid1ItemSource = isource;
@@ -210,6 +214,55 @@ namespace FinancePriceToolProject.ViewModels
                 return decimal.Round(((value1 - value2) / value2), Settings.Default.DefaultRoundingDecimals);
             }
         }
+
+        private string GenerateCsvFilename(DateTime targetDate)
+        {
+            return $"{DateTime.Now.ToString(Settings.Default.DefaultTimeFormatForFileNames)}" +
+                   $"_Prices_at_TargetDate_" +
+                   $"{targetDate.ToString(Settings.Default.DefaultDateFormat)}" +
+                   $".csv";
+        }
+
+        public void WriteTableToCsv()
+        {
+            DateTime targetDate = _lastSelectedDate.Date;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            {
+                FileName = GenerateCsvFilename(targetDate),
+                DefaultExt = "csv",
+                Filter = "Csv Text|*.csv",
+                Title = "Save a Csv File",
+            };
+            var dialogResult = saveFileDialog.ShowDialog() ;
+            if (dialogResult == false || saveFileDialog.FileName == "")
+            {
+                return;
+            }
+
+
+            var currentTimeStamp = DateTime.Now.ToString(Settings.Default.DefaultDateFormat + " " + Settings.Default.DefaultTimeFormat);
+            var targetTimeStamp = targetDate.ToString(Settings.Default.DefaultDateFormat);
+
+            var isource = (from p in Globals.Products
+                           where p.HasComponents == true
+                           select new
+                           {
+                               CurrentTime = currentTimeStamp,
+                               TargetDate = targetTimeStamp,
+                               ProductId = p.Id,
+                               ComponentCount = p.ComponentCount,
+                               Price = p.FixedPrice,
+                               CalculatedPrice = decimal.Round(p.GetCalculatedPrice(targetDate), Settings.Default.ExtendedRoundingDecimals),
+                               CalculatedPriceActual = decimal.Round(p.GetCalculatedPriceActual(targetDate), Settings.Default.ExtendedRoundingDecimals),
+                               DeltaFixedVsActualPrice = decimal.Round(ToPercetile(p.FixedPrice, p.GetCalculatedPriceActual(targetDate)), Settings.Default.ExtendedRoundingDecimals),
+                               ContainsProductsLackingFixedPrice = String.Join("|", p.GetSubProductsLackingPrice().ToArray()),
+                           }).ToList();
+
+            CsvTools.ExportListToFile(isource, saveFileDialog.FileName, Settings.Default.CsvSeparator);
+        }
+
+
         #endregion
 
     }

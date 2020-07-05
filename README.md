@@ -1,6 +1,6 @@
 # FinancePriceCalculator
 
-A tool to calculate part prices through undelying prices 
+A tool to calculate part prices through underlying prices 
 using a multilevel `Bill of Material`.
 Runs on `Microsoft Windows` machines and requires at least `.NetFramework 4.7.2` to be installed.
 

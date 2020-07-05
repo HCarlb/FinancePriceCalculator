@@ -58,5 +58,41 @@ namespace FinancePriceToolProject.Properties {
                 return ((int)(this["DefaultRoundingDecimals"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("yyyy-MM-dd")]
+        public string DefaultDateFormat {
+            get {
+                return ((string)(this["DefaultDateFormat"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("HH:mm:ss")]
+        public string DefaultTimeFormat {
+            get {
+                return ((string)(this["DefaultTimeFormat"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("yyyyMMdd_HHmmss")]
+        public string DefaultTimeFormatForFileNames {
+            get {
+                return ((string)(this["DefaultTimeFormatForFileNames"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int ExtendedRoundingDecimals {
+            get {
+                return ((int)(this["ExtendedRoundingDecimals"]));
+            }
+        }
     }
 }
