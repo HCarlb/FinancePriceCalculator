@@ -12,8 +12,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57017B8B-FF23-4CC6-861E-39C106D8FAC9}.asd|Any CPU.ActiveCfg = Debug|Any CPU
-		{57017B8B-FF23-4CC6-861E-39C106D8FAC9}.asd|Any CPU.Build.0 = Debug|Any CPU
+		{57017B8B-FF23-4CC6-861E-39C106D8FAC9}.asd|Any CPU.ActiveCfg = Release|Any CPU
+		{57017B8B-FF23-4CC6-861E-39C106D8FAC9}.asd|Any CPU.Build.0 = Release|Any CPU
 		{57017B8B-FF23-4CC6-861E-39C106D8FAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{57017B8B-FF23-4CC6-861E-39C106D8FAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57017B8B-FF23-4CC6-861E-39C106D8FAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,8 +23,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UseGlobalSettings = True
-		BuildVersion_StartDate = 2000/1/1
 		SolutionGuid = {9C1FB31C-59E5-409F-AAC6-8374FD601A2C}
+		BuildVersion_StartDate = 2000/1/1
+		BuildVersion_UseGlobalSettings = True
 	EndGlobalSection
 EndGlobal
